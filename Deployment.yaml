@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calculator
+  labels:
+    app: calci
+spec:
+  replicas: 3 # Number of Pod replicas
+  selector:
+    matchLabels:
+      app: calci
+  template:
+    metadata:
+      labels:
+        app: calci
+    spec:
+      containers:
+        - name: calci
+          image: souravhajra12345/my-calci
+          ports:
+            - containerPort: 80
