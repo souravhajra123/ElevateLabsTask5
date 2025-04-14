@@ -60,3 +60,76 @@ sudo mv kubectl /usr/local/bin/
 kubectl version
 ```
 ![image alt](https://github.com/souravhajra123/ElevateLabsTask5/blob/c9896d6d84dd963a5d45f8b6cb7379cc14b7ee9a/images/7.JPG)
+
+## 8. Start `Minikube` and check it
+```bash
+sudo usermod -aG docker $USER && newgrp docker
+minikube start --driver=docker
+# after `Minikube` got started run following command to check it
+kubectl get nodes
+```
+![image alt](https://github.com/souravhajra123/ElevateLabsTask5/blob/4c9156b110b4b8b891adc39dc1160354a13e4743/images/8.JPG)
+
+## 9. Now you are all set to launch `Kubernetes` objects, lets try by launching a `deployment` object
+```bash
+nano Deployment.yaml
+kubectl apply -f Deployment.yaml  # To launch the deployment using Deployment.yaml file
+kubectl get deployments           # To check deployment
+kubectl get replicaset            # To check replicaset
+kubectl get pods                  # To check pods
+```
+![image alt](https://github.com/souravhajra123/ElevateLabsTask5/blob/4c9156b110b4b8b891adc39dc1160354a13e4743/images/9.JPG)
+
+## 10. Now see the details about the deployment using `kubectl describe` command
+```bash
+kubectl describe deployments <name_of_the_deployment>    # Here you can see the "Scaled up replicaset from 0 to 3"
+```
+![image alt](https://github.com/souravhajra123/ElevateLabsTask5/blob/4c9156b110b4b8b891adc39dc1160354a13e4743/images/10.JPG)
+
+## 11. Now we will scale up the deplyoment using `kubectl scale` command
+```bash
+kubectl scale --replicas=6 deployments <name_of_the_deployment>    # Here you can see the "Scaled up replicaset from 3 to 6"
+```
+![image alt](https://github.com/souravhajra123/ElevateLabsTask5/blob/4c9156b110b4b8b891adc39dc1160354a13e4743/images/11.JPG)
+
+## 12. Now we will create one NodePort service to expose the our pod to the internet
+```bash
+nano NodePort.yaml
+kubectl apply -f NodePort.yaml               # To create NodePort service using NodePort.yaml file
+kubectl get svc                              # To check the service
+kubectl describe svc <name_of_the_service>   # To check the details about the service
+kubectl get pods -o wide                     # Here you can see that all pod IPs are being tracked by this NodePort Service
+```
+![image alt](https://github.com/souravhajra123/ElevateLabsTask5/blob/4c9156b110b4b8b891adc39dc1160354a13e4743/images/12.JPG)
+
+## 13. Get the the service URL and access the pod using `curl` command
+```bash
+minikube service <service_name>     # To get the URL of the service
+curl <URL_along_NodePort>           # You can see the command line view of the pod output, that means your pod is exposed to the internet and can be accessed externally
+```
+![image alt](https://github.com/souravhajra123/ElevateLabsTask5/blob/4c9156b110b4b8b891adc39dc1160354a13e4743/images/13.JPG)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
