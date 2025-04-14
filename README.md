@@ -3,3 +3,36 @@
 ## 1. Launch an EC2 Instance
 ![image alt](https://github.com/souravhajra123/ElevateLabsTask5/blob/1b935d0a4d737266b87ce82a01daa3a410d0517b/images/1.JPG)
 
+## 2. Connect to the Instance
+![image alt](https://github.com/souravhajra123/ElevateLabsTask5/blob/275857f403429fe5dc8dbfdb8ba3a31a15b7ad1f/images/2.JPG)
+
+## 3. Update the Instance
+```bash
+sudo apt-get update
+```
+![image alt](https://github.com/souravhajra123/ElevateLabsTask5/blob/275857f403429fe5dc8dbfdb8ba3a31a15b7ad1f/images/3.JPG)
+
+## 4. Install Docker
+```bash
+nano docker.sh     # `ctrl+s` to save the file, `ctrl+x` to exit the nano editor mode
+-------------------
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+sudo apt-get install docker-compose -y
+sudo usermod -aG docker ubuntu
+sudo chmod 777 /var/run/docker.sock
+newgrp docker
+sudo systemctl status docker
+-----------------------
+bash docker.sh
+docker --version
+docker-compose --version
+```
+![image alt](https://github.com/souravhajra123/ElevateLabsTask5/blob/275857f403429fe5dc8dbfdb8ba3a31a15b7ad1f/images/4.JPG)
+
